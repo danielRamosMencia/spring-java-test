@@ -32,7 +32,7 @@ public class AuthService {
     public String authenticate(String username, String password) {
         UsernamePasswordAuthenticationToken authenticationToken = new UsernamePasswordAuthenticationToken(username,
                 password);
-        System.out.println();
+
         Authentication authResult = authenticationManagerBuilder.getObject().authenticate(authenticationToken);
         SecurityContextHolder.getContext().setAuthentication(authResult);
         return jwtUtil.generateToken(authResult);

@@ -24,7 +24,6 @@ public class JwtUtil {
 
     public String generateToken(Authentication authentication){
         UserDetails mainUser = (UserDetails) authentication.getPrincipal();
-        System.out.println(mainUser);
         SecretKey key = Keys.hmacShaKeyFor(secret.getBytes(StandardCharsets.UTF_8));
         return Jwts.builder().setSubject(mainUser.getUsername())
                 .setIssuedAt(new Date())
