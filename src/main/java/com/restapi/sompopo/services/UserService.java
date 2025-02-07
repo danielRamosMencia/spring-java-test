@@ -4,9 +4,7 @@ import com.restapi.sompopo.dtos.AllUsersDto;
 import com.restapi.sompopo.dtos.UserDto;
 import com.restapi.sompopo.entitites.UserEntity;
 import com.restapi.sompopo.repositories.UserRepository;
-import lombok.NoArgsConstructor;
 
-import java.util.Optional;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
