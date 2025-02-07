@@ -7,7 +7,6 @@ import com.restapi.sompopo.repositories.UserRepository;
 import lombok.NoArgsConstructor;
 
 import java.util.Optional;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -19,12 +18,16 @@ import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
 
-@NoArgsConstructor
 @Service
 public class UserService implements UserDetailsService {
-    @Autowired
-    private UserRepository userRepository;
-    private PasswordEncoder passwordEncoder;
+    
+    private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
+
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
+    }
 
     // For auth
     @Override

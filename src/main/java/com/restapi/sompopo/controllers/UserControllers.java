@@ -23,8 +23,14 @@ import org.springframework.web.bind.annotation.PathVariable;
 @RestController
 @RequestMapping("/users")
 public class UserControllers {
+    
+    private final UserService userService;
+
     @Autowired
-    UserService userService;
+    public UserControllers(UserService userService) {
+        this.userService = userService;
+    }
+
 
     @GetMapping()
     public ResponseEntity<List<AllUsersDto>> getAllUsers() {
