@@ -5,6 +5,7 @@ import com.restapi.sompopo.dtos.UserDto;
 import com.restapi.sompopo.entitites.UserEntity;
 import com.restapi.sompopo.repositories.UserRepository;
 
+
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
@@ -15,6 +16,7 @@ import org.springframework.stereotype.Service;
 import java.sql.Date;
 import java.util.Collections;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
