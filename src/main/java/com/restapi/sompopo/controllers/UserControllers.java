@@ -6,6 +6,7 @@ import com.restapi.sompopo.services.UserService;
 import com.restapi.sompopo.dtos.AllUsersDto;
 import com.restapi.sompopo.dtos.UserDto;
 import com.restapi.sompopo.entitites.UserEntity;
+import com.restapi.sompopo.repositories.UserRepository;
 
 import java.util.List;
 
@@ -27,17 +28,26 @@ import org.springframework.web.bind.annotation.PathVariable;
 public class UserControllers {
     
     private final UserService userService;
+    private final UserRepository userRepository;
 
     @Autowired
-    public UserControllers(UserService userService) {
+    public UserControllers(UserService userService, UserRepository userRepository) {
         this.userService = userService;
+        this.userRepository = userRepository;
     }
 
-
     @GetMapping()
-    public ResponseEntity<List<AllUsersDto>> getAllUsers() {
-        List<AllUsersDto> userDtos = userService.getAllUsers();
-        return ResponseEntity.ok(userDtos);
+    public List<AllUsersDto> getAllUsers() {
+        return userRepository.findAllActiveUsers()
+                .stream()
+                .map(user -> new AllUsersDto(
+                        user.getId(),
+                        user.getUsername(),
+                        user.getEmail(),
+                        user.getMsisdn(),
+                        user.getCreatedAt()
+                ))
+                .toList();
     }
 
     @PostMapping()
