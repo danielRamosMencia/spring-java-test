@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  mysqldb:
+    image: mysql:8.0
+    restart: always
+    environment:
+      - MYSQL_ROOT_PASSWORD=RootAdmin01234...
+      - MYSQL_DATABASE=sompopotest
+    ports:
+      - "3307:3306"
+    volumes:
+      - mysql_data:/var/lib/mysql
+    healthcheck:
+      test: ["CMD", "mysqladmin", "ping", "-h", "localhost"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+  app:
+    depends_on:
+      mysqldb:
+        condition: service_healthy
+    build: .
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - SPRING_APPLICATION_NAME=sompopo
+      - SPRING_DATASOURCE_URL=jdbc:mysql://mysqldb:3306/sompopotest
+      - SPRING_DATASOURCE_USERNAME=root
+      - SPRING_DATASOURCE_PASSWORD=RootAdmin01234...
+      - SPRING_DATASOURCE_DRIVER_CLASS_NAME=com.mysql.cj.jdbc.Driver
+      - SPRING_JPA_HIBERNATE_DDL_AUTO=update
+      - SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT=org.hibernate.dialect.MySQL8Dialect
+      - SPRING_JPA_SHOW_SQL=true
+      - JWT_SECRET=673afd4c245cb34b717e438b6cbe395ebfb63f24c854d8d6769ac45d7be69426
+      - JWT_EXPIRATION=86400
+volumes:
+  mysql_data:
+
+
+
+
+
+
