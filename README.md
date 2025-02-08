@@ -14,7 +14,7 @@ git clone https://github.com/danielRamosMencia/spring-java-test.git
 cd spring-java-test
 ```
 
-### Crear contenedor de docker
+### Crear y levantar contenedor de docker
 ```sh
 docker compose up -d
 ```
